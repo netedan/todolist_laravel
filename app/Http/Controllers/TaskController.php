@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use DB;
+use http\Env\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
@@ -42,10 +43,8 @@ class TaskController extends Controller
             'author_id' => $request->input('author_id'),
             'executor_id' => $request->input('executor_id')
         ]);
-
         return redirect('tasks');
-
-}
+    }
 
     /**
      * Display the specified resource.
@@ -53,7 +52,7 @@ class TaskController extends Controller
     public
     function show(Task $task)
     {
-        //
+        return view('task', ['task' => $task]);
     }
 
     /**
@@ -62,17 +61,31 @@ class TaskController extends Controller
     public
     function edit(Task $task)
     {
-        //
+        return view('task_edit', ['task' => $task]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public
-    function update(UpdateTaskRequest $request, Task $task)
+    public function update(UpdateTaskRequest $request, Task $task)
     {
-        TaskController::update($request, $task);
-        return redirect('/tasks');
+        Log::debug('update1');
+        $task->name = $request->input('task_name');
+        $task->status = $request->input('task_status');
+        $task->author_id = $request->input('author_id');
+        $task->executor_id = $request->input('executor_id');
+        $task->save();
+        Log::debug('update2');
+        return redirect('tasks');
+
+
+
+//        $task->update([
+//            'name' => $request->input('task_name'),
+//            'status' => $request->input('task_status'),
+//            'author_id' => $request->input('author_id'),
+//            'executor_id' => $request->input('executor_id')
+//        ]);
     }
 
     /**

@@ -1,4 +1,4 @@
-<form method="POST" action="/tasks">
+<form method="POST" action="http://localhost/tasks">
     @csrf
     <div class="add_page">
         <div>

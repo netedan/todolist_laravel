@@ -30,7 +30,9 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Удалить</button>
                 </form>
-                <form method="get" action="/tasks/{{ $task['id'] }}/edit">
+                <form method="GET" action="{{ route('task_edit', $task->id) }}">
+                    @csrf
+                    @method('EDIT')
                     <input class="button_edit" type="submit" value="Edit">
                 </form>
             </td>
