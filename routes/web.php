@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,10 @@ Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('task_ed
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('task_update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks_destroy');
 
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects');
+Route::post('/projects', [ProjectController::class, 'store'])->name('projects_store');
+Route::get('/projects/create', [ProjectController::class, 'create'])->name('project_add');
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('project_show');
+Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('project_edit');
+Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project_update');
+Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects_destroy');

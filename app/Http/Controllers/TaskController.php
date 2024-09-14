@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('tasks', ['tasks' => $tasks]);
+        return view('/Tasks/tasks', ['tasks' => $tasks]);
     }
 
     /**
@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('task_add');
+        return view('/Tasks/task_add');
     }
 
     /**
@@ -52,7 +52,7 @@ class TaskController extends Controller
     public
     function show(Task $task)
     {
-        return view('task', ['task' => $task]);
+        return view('/Tasks/task', ['task' => $task]);
     }
 
     /**
@@ -61,7 +61,7 @@ class TaskController extends Controller
     public
     function edit(Task $task)
     {
-        return view('task_edit', ['task' => $task]);
+        return view('/Tasks/task_edit', ['task' => $task]);
     }
 
     /**
@@ -69,13 +69,11 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        Log::debug('update1');
         $task->name = $request->input('task_name');
         $task->status = $request->input('task_status');
         $task->author_id = $request->input('author_id');
         $task->executor_id = $request->input('executor_id');
         $task->save();
-        Log::debug('update2');
         return redirect('tasks');
 
 

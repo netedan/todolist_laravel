@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('content')
 <body>
 
 <div class="add_button">
@@ -40,3 +43,4 @@
     @endforeach
 </table>
 </body>
+@endsection
