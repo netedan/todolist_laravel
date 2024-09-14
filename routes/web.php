@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,3 +30,11 @@ Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('pro
 Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('project_edit');
 Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('project_update');
 Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects_destroy');
+
+Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::post('/users', [UserController::class, 'store'])->name('users_store');
+Route::get('/users/create', [UserController::class, 'create'])->name('user_add');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('user_show');
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('user_edit');
+Route::put('/users/{user}', [UserController::class, 'update'])->name('user_update');
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users_destroy');

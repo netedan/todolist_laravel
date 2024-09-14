@@ -75,15 +75,6 @@ class TaskController extends Controller
         $task->executor_id = $request->input('executor_id');
         $task->save();
         return redirect('tasks');
-
-
-
-//        $task->update([
-//            'name' => $request->input('task_name'),
-//            'status' => $request->input('task_status'),
-//            'author_id' => $request->input('author_id'),
-//            'executor_id' => $request->input('executor_id')
-//        ]);
     }
 
     /**
@@ -94,6 +85,5 @@ class TaskController extends Controller
     {
         $task->delete();
         return redirect()->route('tasks');
-
     }
 }
