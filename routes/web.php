@@ -16,6 +16,11 @@ Route::get('/token', function (Request $request) {
     $token = csrf_token();
 });
 
+Route::get('/layout', function () {
+    return view('layout');
+});
+
+
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks');
 Route::post('/tasks', [TaskController::class, 'store'])->name('tasks_store');
 Route::get('/tasks/create', [TaskController::class, 'create'])->name('task_add');

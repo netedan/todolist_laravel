@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" href="/index.css">
+    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
 </head>
 <body>
 <h1>Todolist</h1>

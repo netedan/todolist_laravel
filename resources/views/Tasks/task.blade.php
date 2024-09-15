@@ -1,5 +1,6 @@
-
-    <head>
+@extends('layout')
+@section('content')
+<head>
         <style>
             table {
                 border-collapse: collapse;
@@ -35,3 +36,4 @@
             <td>{{ $task['executor_id'] }}</td>
         </tr>
     </table>
+@endsection
