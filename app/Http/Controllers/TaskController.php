@@ -36,7 +36,6 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        Log::debug('string1');
         $task = Task::create([
             'name' => $request->input('task_name'),
             'status' => $request->input('task_status'),
