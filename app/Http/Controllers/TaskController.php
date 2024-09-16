@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('/ttasks/tasks', ['tasks' => $tasks]);
+        return view('/tasks/tasks', ['tasks' => $tasks]);
     }
 
     /**
@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('/ttasks/task_add');
+        return view('/tasks/task_add');
     }
 
     /**
@@ -50,7 +50,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        return view('/ttasks/task', ['task' => $task]);
+        return view('/tasks/task', ['task' => $task]);
     }
 
     /**
@@ -58,7 +58,7 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('/ttasks/task_edit', ['task' => $task]);
+        return view('/tasks/task_edit', ['task' => $task]);
     }
 
     /**

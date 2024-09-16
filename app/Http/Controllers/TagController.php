@@ -14,7 +14,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        return view('/ttags/tags', ['tags' => $tags]);
+        return view('/tags/tags', ['tags' => $tags]);
     }
 
     /**
@@ -22,7 +22,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('/ttags/tag_add');
+        return view('/tags/tag_add');
     }
 
     /**
@@ -41,7 +41,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('/ttags/tag', ['tag' => $tag]);
+        return view('/tags/tag', ['tag' => $tag]);
     }
 
     /**
@@ -49,7 +49,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('/ttags/tag_edit', ['tag' => $tag]);
+        return view('/tags/tag_edit', ['tag' => $tag]);
     }
 
     /**
