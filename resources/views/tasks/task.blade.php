@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <head>
+<head>
         <style>
             table {
                 border-collapse: collapse;
@@ -20,14 +20,21 @@
             }
         </style>
     </head>
+
     <table>
         <tr>
-            <th>Tag ID</th>
-            <th>Tag name</th>
+            <th>Task ID</th>
+            <th>Task name</th>
+            <th>Task status</th>
+            <th>Task author ID</th>
+            <th>Task executor ID</th>
         </tr>
         <tr>
-            <td>{{ $tag['id'] }}</td>
-            <td>{{ $tag['name'] }}</td>
+            <td>{{ $task['id'] }}</td>
+            <td>{{ $task['name'] }}</td>
+            <td>{{ $task['status'] }}</td>
+            <td>{{ $task['author_id'] }}</td>
+            <td>{{ $task['executor_id'] }}</td>
         </tr>
     </table>
 @endsection

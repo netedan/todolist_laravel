@@ -1,5 +1,5 @@
 @extends('layout')
-{{--todo добавить верстку в index.css--}}
+
 @section('content')
     <head>
         <style>

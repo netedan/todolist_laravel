@@ -20,7 +20,7 @@ class TaskController extends Controller
     public function index()
     {
         $tasks = Task::all();
-        return view('/Tasks/tasks', ['tasks' => $tasks]);
+        return view('/ttasks/tasks', ['tasks' => $tasks]);
     }
 
     /**
@@ -28,7 +28,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('/Tasks/task_add');
+        return view('/ttasks/task_add');
     }
 
     /**
@@ -45,23 +45,20 @@ class TaskController extends Controller
         ]);
         return redirect('tasks');
     }
-
     /**
      * Display the specified resource.
      */
-    public
-    function show(Task $task)
+    public function show(Task $task)
     {
-        return view('/Tasks/task', ['task' => $task]);
+        return view('/ttasks/task', ['task' => $task]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public
-    function edit(Task $task)
+    public function edit(Task $task)
     {
-        return view('/Tasks/task_edit', ['task' => $task]);
+        return view('/ttasks/task_edit', ['task' => $task]);
     }
 
     /**
@@ -80,8 +77,7 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public
-    function destroy(Task $task)
+    public function destroy(Task $task)
     {
         $task->delete();
         return redirect()->route('tasks');

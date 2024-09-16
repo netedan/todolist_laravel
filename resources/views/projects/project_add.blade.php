@@ -1,6 +1,6 @@
-{{--@extends('layout')--}}
-{{--todo добавить верстку в index.css--}}
-{{--@section('content')--}}
+@extends('layout')
+
+@section('content')
     <form method="POST" action="/projects">
     @csrf
         <div class="add_page">
@@ -18,4 +18,4 @@
             </div>
         </div>
     </form>
-{{--@endsection--}}
+@endsection

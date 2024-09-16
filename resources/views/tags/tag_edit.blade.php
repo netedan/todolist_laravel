@@ -1,6 +1,5 @@
 @extends('layout')
-{{--todo добавить верстку в index.css
-todo изучить массивы и работу с ними--}}
+
 @section('content')
     <form method="POST" action="{{ route('tag_update', ['tag' => $tag->id]) }}">
         @csrf

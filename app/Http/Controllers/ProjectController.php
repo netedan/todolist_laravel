@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
-        return view('/Projects/projects', ['projects' => $projects]);
+        return view('/projects/projects', ['projects' => $projects]);
     }
 
     /**
@@ -22,7 +22,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('/Projects/project_add');
+        return view('/projects/project_add');
     }
 
     /**
@@ -42,7 +42,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('/Projects/project', ['project' => $project]);
+        return view('/projects/project', ['project' => $project]);
     }
 
     /**
@@ -50,7 +50,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('/Projects/project_edit', ['project' => $project]);
+        return view('/projects/project_edit', ['project' => $project]);
     }
 
     /**
