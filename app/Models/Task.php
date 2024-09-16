@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Task extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'name',
-        'surname',
-        'patronymic'
+        'status',
+        'author_id',
+        'executor_id'
     ];
+
 }
