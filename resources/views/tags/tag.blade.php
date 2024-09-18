@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    @csrf
     <table>
         <tr>
             <th>Tag ID</th>

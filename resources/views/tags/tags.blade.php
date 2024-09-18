@@ -8,6 +8,7 @@
         <ul>
             <li>
                 <a href="{{ route('tag_add') }}" class="btn btn-primary">Add tag</a>
+                @csrf
             </li>
         </ul>
     </div>

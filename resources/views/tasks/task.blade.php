@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+    @csrf
 <head>
         <style>
             table {
