@@ -25,12 +25,18 @@
                 <td><a href="{{ route('tag_show', $tag->id) }}">{{ $tag->id }}</a></td>
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Удалить</button>
-                <form method="GET" action="{{ route('tag_edit', $tag->id) }}">
-                    @csrf
-                    @method('EDIT')
-                    <input class="button_edit" type="submit" value="Edit">
-                </form>
+                <td>
+                    <form method="POST" action="{{ route('tags_destroy', $tag->id) }}" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
+                    <form method="GET" action="{{ route('tag_edit', $tag->id) }}">
+                        @csrf
+                        @method('EDIT')
+                        <input class="button_edit" type="submit" value="Edit">
+                    </form>
+                </td>
             </tr>
         @endforeach
     </table>
