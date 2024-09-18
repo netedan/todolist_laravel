@@ -13,7 +13,7 @@
         </tr>
         @foreach($projects as $project)
             <tr>
-                <td><a href="/projects/{{ $project['id'] }}">{{ $project['id'] }}</a></td>
+                <td><a href="{{ route('project_show', $project->id) }}">{{ $project->id }}</a></td>
                 <td>{{ $project['author_id'] }}</td>
                 <td>{{ $project['name'] }}</td>
                 {{--        <p>{{ $project->tasks }}</p>--}}

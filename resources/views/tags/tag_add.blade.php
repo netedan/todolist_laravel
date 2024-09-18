@@ -1,21 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <head>
-        <style>
-            body {
-                background-color: beige;
-            }
-
-            .add_page {
-                font-size: 20px;
-                text-align: center;
-                padding: 10px;
-            }
-        </style>
-    </head>
-    <body>
-    <form method="POST" action="/tags">
+    <form method="POST" action="{{ route('tags_store') }}">
         @csrf
         <div class="add_page">
             <div>
@@ -28,6 +14,4 @@
             </div>
         </div>
     </form>
-
-    </body>
 @endsection

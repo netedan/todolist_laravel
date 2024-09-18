@@ -2,7 +2,6 @@
 
 @section('content')
 <body>
-
 <div class="add_button">
     <ul>
         <li>
@@ -22,7 +21,7 @@
     </tr>
     @foreach($tasks as $task)
         <tr>
-            <td><a href="/tasks/{{ $task['id'] }}">{{ $task['id'] }}</a></td>
+            <td><a href="{{ route('task_show', $task->id) }}">{{ $task->id }}</a></td>
             <td>{{ $task['name'] }}</td>
             <td>{{ $task['status'] }}</td>
             <td>{{ $task['author_id'] }}</td>
