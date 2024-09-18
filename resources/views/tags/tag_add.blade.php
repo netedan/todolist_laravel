@@ -1,20 +1,6 @@
 @extends('layout')
 
 @section('content')
-    <head>
-        <style>
-            body {
-                background-color: beige;
-            }
-
-            .add_page {
-                font-size: 20px;
-                text-align: center;
-                padding: 10px;
-            }
-        </style>
-    </head>
-    <body>
     <form method="POST" action="/tags">
         @csrf
         <div class="add_page">
@@ -28,6 +14,4 @@
             </div>
         </div>
     </form>
-
-    </body>
 @endsection

@@ -1,8 +1,6 @@
 @extends('layout')
 
 @section('content')
-    <head>
-    </head>
     <div class="add_button">
         <ul>
             <li>
