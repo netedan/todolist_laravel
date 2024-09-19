@@ -31,11 +31,11 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
-                    <form method="GET" action="{{ route('user_edit', $user->id) }}">
+                    <div>
+                        <a href="{{ route('user_edit', $user->id) }}">Edit</a>
                         @csrf
                         @method('EDIT')
-                        <input class="button_edit" type="submit" value="Edit">
-                    </form>
+                    </div>
                 </td>
             </tr>
         @endforeach

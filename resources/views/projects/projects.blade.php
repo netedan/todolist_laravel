@@ -16,18 +16,17 @@
                 <td><a href="/projects/{{ $project['id'] }}">{{ $project['id'] }}</a></td>
                 <td>{{ $project['author_id'] }}</td>
                 <td>{{ $project['name'] }}</td>
-                {{--        <p>{{ $project->tasks }}</p>--}}
                 <td>
                     <form method="POST" action="{{ route('projects_destroy', $project->id) }}" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
-                    <form method="GET" action="{{ route('project_edit', $project->id) }}">
+                    <div>
+                        <a href="{{ route('project_edit', $project->id) }}">Edit</a>
                         @csrf
                         @method('EDIT')
-                        <input class="button_edit" type="submit" value="Edit">
-                    </form>
+                    </div>
                 </td>
             </tr>
         @endforeach
