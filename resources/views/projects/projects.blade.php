@@ -22,11 +22,9 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Удалить</button>
                     </form>
-                    <form method="GET" action="{{ route('project_edit', $project->id) }}">
-                        @csrf
-                        @method('EDIT')
-                        <input class="button_edit" type="submit" value="Edit">
-                    </form>
+                    <div>
+                        <a href="{{ route('project_edit', $project->id) }}">Edit</a>
+                    </div>
                 </td>
             </tr>
         @endforeach

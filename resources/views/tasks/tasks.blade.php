@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-<body>
 <div class="add_button">
     <ul>
         <li>
@@ -32,14 +31,11 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Удалить</button>
                 </form>
-                <form method="GET" action="{{ route('task_edit', $task->id) }}">
-                    @csrf
-                    @method('EDIT')
-                    <input class="button_edit" type="submit" value="Edit">
-                </form>
+                <div>
+                    <a href="{{ route('task_edit', $task->id) }}">Edit</a>
+                </div>
             </td>
         </tr>
     @endforeach
 </table>
-</body>
 @endsection
