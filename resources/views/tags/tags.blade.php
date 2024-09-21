@@ -1,9 +1,6 @@
 @extends('layout')
 
 @section('content')
-    <head>
-    </head>
-    <body>
     <div class="add_button">
         <ul>
             <li>
@@ -36,5 +33,4 @@
             </tr>
         @endforeach
     </table>
-    </body>
 @endsection
