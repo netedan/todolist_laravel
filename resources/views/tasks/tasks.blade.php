@@ -35,8 +35,6 @@
                 </form>
                 <div>
                     <a href="{{ route('task_edit', $task->id) }}">Edit</a>
-                    @csrf
-                    @method('EDIT')
                 </div>
             </td>
         </tr>

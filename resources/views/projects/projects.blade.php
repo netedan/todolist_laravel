@@ -24,8 +24,6 @@
                     </form>
                     <div>
                         <a href="{{ route('project_edit', $project->id) }}">Edit</a>
-                        @csrf
-                        @method('EDIT')
                     </div>
                 </td>
             </tr>

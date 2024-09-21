@@ -33,8 +33,6 @@
                     </form>
                     <div>
                         <a href="{{ route('user_edit', $user->id) }}">Edit</a>
-                        @csrf
-                        @method('EDIT')
                     </div>
                 </td>
             </tr>

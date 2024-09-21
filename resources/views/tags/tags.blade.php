@@ -29,8 +29,6 @@
                     </form>
                     <div>
                         <a href="{{ route('tag_edit', $tag->id) }}">Edit</a>
-                        @csrf
-                        @method('EDIT')
                     </div>
                 </td>
             </tr>
