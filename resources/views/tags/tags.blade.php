@@ -18,10 +18,7 @@
             <tr>
                 <td><a href="{{ route('tag_show', $tag->id) }}">{{ $tag->id }}</a></td>
                 <td>{{ $tag['name'] }}</td>
-                <td>
                 <td><a href="{{ route('tag_show', $tag->id) }}">{{ $tag->id }}</a></td>
-                @csrf
-                @method('DELETE')
                 <td>
                     <form method="POST" action="{{ route('tags_destroy', $tag->id) }}" style="display:inline;">
                         @csrf
