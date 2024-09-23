@@ -31,22 +31,22 @@ Route::controller(ProjectController::class)->prefix('projects')->group(function 
 });
 
 Route::controller(UserController::class)->prefix('users')->group(function () {
-    Route::get('/users', 'index')->name('users');
-    Route::get('/users/create', 'create')->name('user_add');
-    Route::post('/users', 'store')->name('user_store');
-    Route::get('/users/{user}', 'show')->name('user_show');
-    Route::get('/users/{user}/edit', 'edit')->name('user_edit');
-    Route::put('/users/{user}', 'update')->name('user_update');
-    Route::delete('/users/{user}', 'destroy')->name('users_destroy');
+    Route::get('/', 'index')->name('users');
+    Route::get('/create', 'create')->name('user_add');
+    Route::post('/', 'store')->name('user_store');
+    Route::get('/{user}', 'show')->name('user_show');
+    Route::get('/{user}/edit', 'edit')->name('user_edit');
+    Route::put('/{user}', 'update')->name('user_update');
+    Route::delete('/{user}', 'destroy')->name('users_destroy');
 });
 
 Route::controller(TagController::class)->prefix('tags')->group(function () {
-    Route::get('/tags', 'index')->name('tags');
-    Route::get('/tags/create', 'create')->name('tag_add');
-    Route::post('/tags', 'store')->name('tags_store');
-    Route::get('/tags/{tag}', 'show')->name('tag_show');
-    Route::get('/tags/{tag}/edit', 'edit')->name('tag_edit');
-    Route::put('/tags/{tag}', 'update')->name('tag_update');
-    Route::delete('/tags/{tag}', 'destroy')->name('tags_destroy');
+    Route::get('/', 'index')->name('tags');
+    Route::get('/create', 'create')->name('tag_add');
+    Route::post('/', 'store')->name('tags_store');
+    Route::get('/{tag}', 'show')->name('tag_show');
+    Route::get('/{tag}/edit', 'edit')->name('tag_edit');
+    Route::put('/{tag}', 'update')->name('tag_update');
+    Route::delete('/{tag}', 'destroy')->name('tags_destroy');
 });
 
