@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <form method="POST" action="/users">
+    <form method="POST" action="{{ route('users_store') }}">
     @csrf
         <div class="add_page">
             <div>

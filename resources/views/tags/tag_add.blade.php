@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <form method="POST" action="/tags">
+    <form method="POST" action="{{ route('tags_store') }}">
         @csrf
         <div class="add_page">
             <div>

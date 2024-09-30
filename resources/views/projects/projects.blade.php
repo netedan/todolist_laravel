@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="sub_navigation">
-        <a class="add_button" href="/projects/create">Add project</a>
+        <a href="{{ route('project_add') }}" class="btn btn-primary">Add project</a>
     </div>
     <table>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
         @foreach($projects as $project)
             <tr>
-                <td><a href="/projects/{{ $project['id'] }}">{{ $project['id'] }}</a></td>
+                <td><a href="{{ route('project_show', $project->id) }}">{{ $project->id }}</a></td>
                 <td>{{ $project['author_id'] }}</td>
                 <td>{{ $project['name'] }}</td>
                 <td>

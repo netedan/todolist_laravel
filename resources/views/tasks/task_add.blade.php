@@ -1,4 +1,4 @@
-<form method="POST" action="http://localhost/tasks">
+<form method="POST" action="{{ route('tasks_store') }}">
     @csrf
     <div class="add_page">
         <div>

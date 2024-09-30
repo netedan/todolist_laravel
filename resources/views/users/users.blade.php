@@ -19,7 +19,7 @@
         </tr>
         @foreach($users as $user)
             <tr>
-                <td><a href="/users/{{ $user['id'] }}">{{ $user['id'] }}</a></td>
+                <td><a href="{{ route('user_show', $user->id) }}">{{ $user->id }}</a></td>
                 <td>{{ $user['name'] }}</td>
                 <td>{{ $user['surname'] }}</td>
                 <td>{{ $user['patronymic'] }}</td>
