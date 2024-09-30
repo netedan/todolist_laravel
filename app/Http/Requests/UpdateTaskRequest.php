@@ -22,10 +22,10 @@ class UpdateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-//            'task_name' => 'required|string|max:255',
-//            'task_status' => 'required|string|max:255',
-//            'author_id' => 'required|integer',
-//            'executor_id' => 'required|integer',
+            'task_name' => 'required|string|max:255',
+            'task_status' => 'required|string|max:255',
+            'author_id' => 'required|integer',
+            'executor_id' => 'required|integer',
         ];
     }
 }
