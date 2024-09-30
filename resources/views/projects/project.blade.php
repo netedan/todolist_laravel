@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-    @csrf
     <table>
         <tr>
             <th>Project ID</th>

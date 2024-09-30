@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('content')
-    @csrf
     <div class="sub_navigation">
         <a class="add_button" href="/projects/create">Add project</a>
     </div>

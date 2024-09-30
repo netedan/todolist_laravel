@@ -5,7 +5,6 @@
     <ul>
         <li>
             <a href="{{ route('task_add') }}" class="btn btn-primary">Добавить задачу</a>
-            @csrf
         </li>
     </ul>
 </div>

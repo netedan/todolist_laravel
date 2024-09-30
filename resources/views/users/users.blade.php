@@ -5,7 +5,6 @@
         <ul>
             <li>
                 <a href="{{ route('user_add') }}" class="btn btn-primary">Add user</a>
-                @csrf
             </li>
         </ul>
     </div>
