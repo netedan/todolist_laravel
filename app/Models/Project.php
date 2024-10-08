@@ -12,4 +12,8 @@ class Project extends Model
         'name',
         'author_id',
     ];
+    public function task()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

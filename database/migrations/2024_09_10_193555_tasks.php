@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('status');
-            $table->integer('author_id');
-            $table->integer('executor_id');
+            $table->foreignId('author_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('executor_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('project_id')->constrained('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }
