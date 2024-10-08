@@ -25,6 +25,7 @@ class StoreUserRequest extends FormRequest
             'user_name' => 'required|string|max:255',
             'user_surname' => 'required|string|max:255',
             'user_patronymic' => 'required|string|max:255',
+            'project_id' => 'nullable|integer|exists:projects,id',
         ];
     }
 }
