@@ -12,6 +12,12 @@ class User extends Model
     protected $fillable = [
         'name',
         'surname',
-        'patronymic'
+        'patronymic',
+        'project_id'
     ];
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }

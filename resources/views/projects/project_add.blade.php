@@ -12,6 +12,10 @@
                 <label> Project author ID </label>
                 <input type="number" name="author_id">
             </div>
+            <div>
+                <label> Project User ID </label>
+                <input type="number" name="user_id">
+            </div>
             <div id="add">
                 <label> Add project </label>
                 <input type="submit" name="Add project">
