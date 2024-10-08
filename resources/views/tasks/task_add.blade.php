@@ -17,11 +17,13 @@
             <label> Task executor ID </label>
             <input type="number" name="executor_id">
         </div>
+        <div>
+            <label> Task project ID </label>
+            <input type="number" name="project_id">
+        </div>
         <div id="add">
             <label> Add task </label>
             <input type="submit" name="Add task">
         </div>
     </div>
 </form>
-
-

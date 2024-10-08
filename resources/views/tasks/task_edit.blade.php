@@ -18,6 +18,10 @@
         <input type="number" name="executor_id" value="{{$task->executor_id}}">
     </div>
     <div>
+        <label> Project ID</label>
+        <input type="number" name="project_id" value="{{$task->project_id}}">
+    </div>
+    <div>
         <input type="submit" name="Edit task">
     </div>
 </form>
