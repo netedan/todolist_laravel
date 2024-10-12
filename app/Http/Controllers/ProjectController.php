@@ -33,7 +33,6 @@ class ProjectController extends Controller
         $project = Project::create([
             'name' => $request->input('project_name'),
             'author_id' => $request->input('author_id'),
-            'user_id' => $request->input('user_id'),
         ]);
         return redirect('/projects');
     }
