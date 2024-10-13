@@ -14,6 +14,7 @@
             <th>User name</th>
             <th>User surname</th>
             <th>User patronymic</th>
+            <th>User projects</th>
             <th>Manage</th>
         </tr>
         @foreach($users as $user)
@@ -22,6 +23,7 @@
                 <td>{{ $user['name'] }}</td>
                 <td>{{ $user['surname'] }}</td>
                 <td>{{ $user['patronymic'] }}</td>
+                <td>{{ $user->projects_count }}</td>
                 <td>
                     <form method="POST" action="{{ route('users_destroy', $user->id) }}" style="display:inline;">
                         @csrf

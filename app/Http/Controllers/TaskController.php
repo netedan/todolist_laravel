@@ -40,7 +40,9 @@ class TaskController extends Controller
             'name' => $request->input('task_name'),
             'status' => $request->input('task_status'),
             'author_id' => $request->input('author_id'),
-            'executor_id' => $request->input('executor_id')
+            'executor_id' => $request->input('executor_id'),
+            'project_id' => $request->input('project_id'),
+
         ]);
         return redirect('tasks');
     }
@@ -49,6 +51,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $task->load('project');
         return view('/tasks/task', ['task' => $task]);
     }
 
@@ -69,6 +72,7 @@ class TaskController extends Controller
         $task->status = $request->input('task_status');
         $task->author_id = $request->input('author_id');
         $task->executor_id = $request->input('executor_id');
+        $task->project_id = $request->input('project_id');
         $task->save();
         return redirect('tasks');
     }

@@ -13,7 +13,15 @@ class Task extends Model
         'name',
         'status',
         'author_id',
-        'executor_id'
+        'executor_id',
+        'project_id'
     ];
-
+        public function tags()
+        {
+            return $this->belongsToMany(Tag::class, 'tags_tasks');
+        }
+    public function project()
+    {
+        return $this->belongsTo(Project::class, 'project_id');
+    }
 }

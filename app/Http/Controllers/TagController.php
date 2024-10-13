@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use App\Models\Project;
 use App\Models\Tag;
+use App\Models\Task;
 
 class TagController extends Controller
 {
@@ -22,6 +24,8 @@ class TagController extends Controller
      */
     public function create()
     {
+        $projects = Project::all();
+        $tasks = Task::all();
         return view('/tags/tag_add');
     }
 
@@ -31,8 +35,11 @@ class TagController extends Controller
     public function store(StoreTagRequest $request)
     {
         $tag = Tag::create([
-            'name' => $request->input('tag_name')
+            'name' => $request->input('tag_name'),
+            'project_id' => $request->input('project_id'),
+            'task_id' => $request->input('task_id'),
         ]);
+
         return redirect('/tags');
     }
 

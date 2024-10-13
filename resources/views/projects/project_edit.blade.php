@@ -13,6 +13,10 @@
             <input type="text" name="project_name" value="{{$project['project_name']}}">
         </div>
         <div>
+            <label> User ID </label>
+            <input type="text" name="user_id" value="{{$project['user_id']}}">
+        </div>
+        <div>
             <input type="submit" name="Edit project">
         </div>
     </form>
