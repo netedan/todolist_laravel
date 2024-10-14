@@ -11,9 +11,16 @@ class Task extends Model
 
     protected $fillable = [
         'name',
-        'status',
         'author_id',
-        'executor_id'
+        'executor_id',
+        'due_date',
+        'status'
     ];
-
+    public function archiveIfOverdue()
+    {
+        if ($this->status !== 'Archive' && now()->greaterThan($this->due_date)) {
+            $this->status = 'Archive';
+            $this->save();
+        }
+    }
 }

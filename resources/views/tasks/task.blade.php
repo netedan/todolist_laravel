@@ -6,6 +6,7 @@
             <th>Task ID</th>
             <th>Task name</th>
             <th>Task status</th>
+            <th>Due Date</th>
             <th>Task author ID</th>
             <th>Task executor ID</th>
         </tr>
@@ -13,8 +14,11 @@
             <td>{{ $task['id'] }}</td>
             <td>{{ $task['name'] }}</td>
             <td>{{ $task['status'] }}</td>
+            <td>{{ $task['due_date'] ? \Carbon\Carbon::parse($task['due_date'])->format('Y-m-d H:i') : 'Not set' }}</td>
             <td>{{ $task['author_id'] }}</td>
             <td>{{ $task['executor_id'] }}</td>
         </tr>
     </table>
 @endsection
+
+

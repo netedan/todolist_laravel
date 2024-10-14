@@ -18,6 +18,7 @@ Route::controller(TaskController::class)->prefix('tasks')->group(function () {
     Route::get('/{task}/edit', 'edit')->name('task_edit');
     Route::put('/{task}', 'update')->name('task_update');
     Route::delete('/{task}', 'destroy')->name('tasks_destroy');
+    Route::post('tasks/check-deadlines', 'checkDeadlines')->name('tasks_check_deadlines');
 });
 
 Route::controller(ProjectController::class)->prefix('projects')->group(function () {
