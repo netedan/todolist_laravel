@@ -8,8 +8,9 @@
             <th>Task status</th>
             <th>Task author ID</th>
             <th>Task executor ID</th>
-            <th> Project ID</th>
-            <th> Project name</th>
+            <th>Project ID</th>
+            <th>Project name</th>
+            <th>Task tag</th>
         </tr>
         <tr>
             <td>{{ $task['id'] }}</td>
@@ -19,6 +20,11 @@
             <td>{{ $task->executor->name }} {{ $task->executor->surname }} {{ $task->executor->patronymic }}</td>
             <td>{{ $task['project_id'] }}</td>
             <td>{{ $task->project->name }}</td>
+            <td>
+                @foreach ($task->tags as $tag)
+                    <a href="{{ route('tag_show', $tag->id) }}">{{ $tag->name }}</a>
+                @endforeach
+            </td>
         </tr>
     </table>
 @endsection

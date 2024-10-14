@@ -16,6 +16,10 @@ class Task extends Model
         'executor_id',
         'project_id'
     ];
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'tag_task');
+    }
 
     public function project()
     {

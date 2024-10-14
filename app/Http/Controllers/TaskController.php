@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Tag;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use DB;
@@ -19,7 +20,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::with('project', 'author', 'executor')->get();
+        $tasks = Task::withCount('tags')->with('project', 'author', 'executor')->get();
         return view('/tasks/tasks', ['tasks' => $tasks]);
     }
 
@@ -28,7 +29,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('/tasks/task_add');
+        $tags = Tag::all();
+        return view('/tasks/task_add', compact('tags'));
     }
 
     /**
@@ -43,6 +45,8 @@ class TaskController extends Controller
             'executor_id' => $request->input('executor_id'),
             'project_id' => $request->input('project_id'),
         ]);
+
+        $task->tags()->attach($request->input('tag_id', []));
         return redirect('tasks');
     }
     /**
@@ -50,7 +54,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        $task->load('project');
+        $task->load('project', 'tags');
         return view('/tasks/task', ['task' => $task]);
     }
 
@@ -59,7 +63,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('/tasks/task_edit', ['task' => $task]);
+        $tags = Tag::all();
+        return view('/tasks/task_edit', compact('task', 'tags'));
     }
 
     /**
@@ -72,6 +77,7 @@ class TaskController extends Controller
         $task->author_id = $request->input('author_id');
         $task->executor_id = $request->input('executor_id');
         $task->project_id = $request->input('project_id');
+        $task->tags()->sync($request->input('tag_id', []));
         $task->save();
         return redirect('tasks');
     }
