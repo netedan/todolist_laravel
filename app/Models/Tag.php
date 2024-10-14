@@ -12,4 +12,13 @@ class Tag extends Model
     protected $fillable = [
         'name'
     ];
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'tag_project');
+    }
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'tag_task');
+    }
 }
