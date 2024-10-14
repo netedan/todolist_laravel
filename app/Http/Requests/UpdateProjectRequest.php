@@ -24,6 +24,7 @@ class UpdateProjectRequest extends FormRequest
         return [
             'project_name' => 'required|string|max:255',
             'author_id' => 'required|integer',
+            'tag_id' => 'nullable|integer',
         ];
     }
 }

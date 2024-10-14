@@ -16,6 +16,7 @@
         <th>Task status</th>
         <th>Task author ID</th>
         <th>Task executor ID</th>
+        <th>Tags</th>
         <th>Manage</th>
     </tr>
     @foreach($tasks as $task)
@@ -25,6 +26,7 @@
             <td>{{ $task['status'] }}</td>
             <td>{{ $task['author_id'] }}</td>
             <td>{{ $task['executor_id'] }}</td>
+            <td>{{ $task->tags_count }}</td>
             <td>
                 <form method="POST" action="{{ route('tasks_destroy', $task->id) }}" style="display:inline;">
                     @csrf

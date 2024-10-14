@@ -12,12 +12,16 @@
         <tr>
             <th>Tag ID</th>
             <th>Tag name</th>
+            <th>Projects attached</th>
+            <th>Tasks attached</th>
             <th>Manage</th>
         </tr>
         @foreach($tags as $tag)
             <tr>
                 <td><a href="{{ route('tag_show', $tag->id) }}">{{ $tag->id }}</a></td>
                 <td>{{ $tag['name'] }}</td>
+                <td>{{ $tag->projects_count }}</td>
+                <td>{{ $tag->tasks_count }}</td>
                 <td>
                     <form method="POST" action="{{ route('tags_destroy', $tag->id) }}" style="display:inline;">
                         @csrf

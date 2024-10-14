@@ -23,6 +23,8 @@ class StoreTagRequest extends FormRequest
     {
         return [
             'tag_name' => 'required|string|max:255',
+            'project_id' => 'nullable|integer',
+            'task_id' => 'nullable|integer',
         ];
     }
 }

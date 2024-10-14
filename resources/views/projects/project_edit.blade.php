@@ -13,6 +13,15 @@
             <input type="text" name="project_name" value="{{$project['project_name']}}">
         </div>
         <div>
+            <label>Select Tag</label>
+            <select name="tag_id">
+                <option value="">Select a tag</option>
+                @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <input type="submit" name="Edit project">
         </div>
     </form>
