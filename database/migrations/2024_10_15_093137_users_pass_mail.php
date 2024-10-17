@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->integer('author_id');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->unique();
+            $table->string('password')->unique();
         });
     }
 
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropColumns('users', ['email', 'password']);
     }
 };

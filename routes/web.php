@@ -5,6 +5,7 @@ use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -50,3 +51,13 @@ Route::controller(TagController::class)->prefix('tags')->group(function () {
     Route::delete('/{tag}', 'destroy')->name('tags_destroy');
 });
 
+Route::controller(\App\Http\Controllers\Auth\RegisterController::class)->prefix('register')->group(function () {
+    Route::get('/', 'create')->name('register');
+    Route::post('/', 'store')->name('store');
+});
+
+Route::controller(\App\Http\Controllers\Auth\AuthController::class)->prefix('auth')->group(function () {
+    Route::get('/', 'create')->name('auth');
+    Route::post('/', 'login')->name('login');
+    Route::get('/logout', 'logout')->name('logout');
+});

@@ -19,6 +19,9 @@
         <li>
             <a href="/tags">Tags</a>
         </li>
+        <li>
+            <a href="{{route('logout')}}">Logout</a>
+        </li>
     </ul>
 </div>
 @yield('content')
