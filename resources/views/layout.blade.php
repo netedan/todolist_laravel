@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('/index.css') }}">
 </head>
 <body>
 <h1>Todolist</h1>
@@ -20,6 +20,10 @@
             <a href="/tags">Tags</a>
         </li>
     </ul>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit">Logout</button>
+    </form>
 </div>
 @yield('content')
 </body>
