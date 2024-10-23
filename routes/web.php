@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
@@ -48,5 +49,9 @@ Route::controller(TagController::class)->prefix('tags')->group(function () {
     Route::get('/{tag}/edit', 'edit')->name('tag_edit');
     Route::put('/{tag}', 'update')->name('tag_update');
     Route::delete('/{tag}', 'destroy')->name('tags_destroy');
+});
+
+Route::controller(SearchController::class)->prefix('search')->group(function () {
+    Route::get('/', 'index')->name('search');
 });
 
