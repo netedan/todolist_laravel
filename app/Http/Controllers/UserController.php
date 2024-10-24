@@ -5,16 +5,37 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('/users/users', ['users' => $users]);
+        $query = User::query();
+
+        if ($request->filled('name')){
+            $query->where('name', 'like', '%'.$request->get('name').'%');
+        }
+
+        if ($request->filled('surname')){
+            $query->where('surname', 'like', '%'.$request->get('surname').'%');
+        }
+
+        if ($request->filled('patronymic')){
+            $query->where('patronymic', 'like', '%'.$request->get('patronymic').'%');
+        }
+
+        if ($request->filled('user_id')){
+            $query->where('id', $request->get('user_id'));
+        }
+
+        $users = $query->get();
+
+        return view('users.users', compact('users'));
+
     }
 
     /**

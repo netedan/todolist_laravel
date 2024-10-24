@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use DB;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
@@ -17,10 +17,33 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
-        return view('/tasks/tasks', ['tasks' => $tasks]);
+        $query = Task::query();
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->get('name') . '%');
+        }
+
+        if($request->filled('status')) {
+            $query->where('status', $request->get('status'));
+        }
+
+        if($request->filled('author_id')) {
+            $query->where('author_id', $request->get('author_id'));
+        }
+
+        if($request->filled('executor_id')) {
+            $query->where('executor_id',$request->get('executor_id'));
+        }
+
+        if($request->filled('task_id')) {
+            $query->where('id', $request->get('task_id'));
+        }
+
+        $tasks = $query->get();
+
+        return view('tasks.tasks', compact('tasks'));
     }
 
     /**

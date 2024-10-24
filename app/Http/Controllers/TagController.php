@@ -5,16 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::all();
-        return view('/tags/tags', ['tags' => $tags]);
+        $query = Tag::query();
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', "%{$request->get('name')}%");
+        }
+
+        if ($request->filled('tag_id')) {
+            $query->where('id', $request->get('tag_id'));
+        }
+        $tags = $query->get();
+
+        return view('tags.tags', compact('tags'));
     }
 
     /**

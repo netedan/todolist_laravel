@@ -8,12 +8,23 @@
             </li>
         </ul>
     </div>
+
+    <form method="GET" action="{{ route('users') }}" style="margin-bottom: 20px;">
+        <input type="number" name="user_id" placeholder="User ID" value="{{ request('user_id') }}">
+        <input type="text" name="name" placeholder="Name" value="{{ request('name') }}">
+        <input type="text" name="surname" placeholder="Surname" value="{{ request('surname') }}">
+        <input type="text" name="patronymic" placeholder="Patronymic" value="{{ request('patronymic') }}">
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{{ route('users') }}" class="btn btn-secondary" style="margin-left: 10px;">Reset filter</a>
+    </form>
+
     <table>
         <tr>
             <th>User ID</th>
-            <th>User name</th>
-            <th>User surname</th>
-            <th>User patronymic</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Patronymic</th>
             <th>Manage</th>
         </tr>
         @foreach($users as $user)
@@ -26,7 +37,7 @@
                     <form method="POST" action="{{ route('users_destroy', $user->id) }}" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Удалить</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <div>
                         <a href="{{ route('user_edit', $user->id) }}">Edit</a>
@@ -36,3 +47,4 @@
         @endforeach
     </table>
 @endsection
+

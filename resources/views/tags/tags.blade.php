@@ -8,6 +8,15 @@
             </li>
         </ul>
     </div>
+
+    <form method="GET" action="{{ route('tags') }}" style="margin-bottom: 20px;">
+        <input type="number" name="tag_id" placeholder="Tag ID" value="{{ request('tag_id') }}">
+        <input type="text" name="name" placeholder="Tag name" value="{{ request('name') }}">
+
+        <button type="submit" class="btn btn-primary">Filter</button>
+        <a href="{{ route('tags') }}" class="btn btn-secondary" style="margin-left: 10px;">Reset filter</a>
+    </form>
+
     <table>
         <tr>
             <th>Tag ID</th>
@@ -32,3 +41,4 @@
         @endforeach
     </table>
 @endsection
+
