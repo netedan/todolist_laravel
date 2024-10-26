@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use DB;
-use http\Env\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
@@ -17,10 +17,18 @@ class TaskController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
-        return view('/tasks/tasks', ['tasks' => $tasks]);
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['asc', 'desc'])) {
+            $sort = 'id';
+        }
+
+        $tasks = Task::orderBy($sort, $order)->get();
+
+        return view('/tasks/tasks', compact('tasks'));
     }
 
     /**

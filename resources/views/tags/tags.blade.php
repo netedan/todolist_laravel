@@ -10,8 +10,8 @@
     </div>
     <table>
         <tr>
-            <th>Tag ID</th>
-            <th>Tag name</th>
+            <th><a href="{{ route('tags', ['sort' => 'id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Tag ID</a></th>
+            <th><a href="{{ route('tags', ['sort' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Tag name</a></th>
             <th>Manage</th>
         </tr>
         @foreach($tags as $tag)
@@ -22,7 +22,7 @@
                     <form method="POST" action="{{ route('tags_destroy', $tag->id) }}" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Удалить</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <div>
                         <a href="{{ route('tag_edit', $tag->id) }}">Edit</a>

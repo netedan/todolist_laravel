@@ -8,12 +8,13 @@
             </li>
         </ul>
     </div>
+
     <table>
         <tr>
-            <th>User ID</th>
-            <th>User name</th>
-            <th>User surname</th>
-            <th>User patronymic</th>
+            <th><a href="{{ route('users', ['sort' => 'id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">User ID</a></th>
+            <th><a href="{{ route('users', ['sort' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">User name</a></th>
+            <th><a href="{{ route('users', ['sort' => 'surname', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">User surname</a></th>
+            <th><a href="{{ route('users', ['sort' => 'patronymic', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">User patronymic</a></th>
             <th>Manage</th>
         </tr>
         @foreach($users as $user)
@@ -36,3 +37,4 @@
         @endforeach
     </table>
 @endsection
+

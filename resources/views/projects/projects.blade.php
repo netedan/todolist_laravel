@@ -6,9 +6,10 @@
     </div>
     <table>
         <tr>
-            <th>Project ID</th>
-            <th>Author ID</th>
-            <th>Project name</th>
+            <th><a href="{{ route('projects', ['sort' => 'id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Project ID</a></th>
+            <th><a href="{{ route('projects', ['sort' => 'author_id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Author ID</a></th>
+            <th><a href="{{ route('projects', ['sort' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Project name</a></th>
+
             <th>Manage</th>
         </tr>
         @foreach($projects as $project)
@@ -20,7 +21,7 @@
                     <form method="POST" action="{{ route('projects_destroy', $project->id) }}" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Удалить</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                     <div>
                         <a href="{{ route('project_edit', $project->id) }}">Edit</a>

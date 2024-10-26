@@ -2,19 +2,30 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::all();
-        return view('/projects/projects', ['projects' => $projects]);
+
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['asc', 'desc'])) {
+            $order = 'asc';
+        }
+
+        $projects = Project::orderBy($sort, $order)->get();
+
+        return view('/projects/projects', compact('projects'));
     }
 
     /**

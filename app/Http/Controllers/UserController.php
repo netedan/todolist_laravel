@@ -5,16 +5,24 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('/users/users', ['users' => $users]);
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['id', 'name'])) {
+            $sort = 'id';
+        }
+
+        $users = User::orderBy($sort, $order)->get();
+        return view('/users/users', compact('users'));
     }
 
     /**

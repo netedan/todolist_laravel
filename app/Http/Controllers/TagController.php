@@ -5,16 +5,25 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::all();
-        return view('/tags/tags', ['tags' => $tags]);
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($sort, ['id', 'name'])) {
+            $sort = 'id';
+        }
+
+        $tags = Tag::orderBy($sort, $order)->get();
+
+        return view('/tags/tags', compact('tags'));
     }
 
     /**
