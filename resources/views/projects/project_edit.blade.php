@@ -10,14 +10,13 @@
         </div>
         <div>
             <label> Project name </label>
-            <input type="text" name="project_name" value="{{$project['project_name']}}">
-        </div>
-        <div>
-            <label> User ID </label>
-            <input type="text" name="user_id" value="{{$project['user_id']}}">
+            <input type="text" name="project_name" value="{{$project['name']}}">
         </div>
         <div>
             <input type="submit" name="Edit project">
         </div>
+
+        @include('forms.errors')
+
     </form>
 @endsection

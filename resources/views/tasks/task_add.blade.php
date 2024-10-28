@@ -21,9 +21,12 @@
             <input type="number" name="executor_id">
         </div>
         <div>
-            <label>Project ID</label>
-            <input type="text" name="project_id">
+            <label> Task project ID </label>
+            <input type="number" name="project_id">
         </div>
+
+        @include('forms.errors')
+
         <div id="add">
             <label> Add task </label>
             <input type="submit" name="Add task">
@@ -31,5 +34,3 @@
     </div>
 </form>
 @endsection
-
-

@@ -16,6 +16,7 @@
         <th>Task status</th>
         <th>Task author ID</th>
         <th>Task executor ID</th>
+        <th> Project ID</th>
         <th>Manage</th>
     </tr>
     @foreach($tasks as $task)
@@ -23,8 +24,9 @@
             <td><a href="{{ route('task_show', $task->id) }}">{{ $task->id }}</a></td>
             <td>{{ $task['name'] }}</td>
             <td>{{ $task['status'] }}</td>
-            <td>{{ $task['author_id'] }}</td>
-            <td>{{ $task['executor_id'] }}</td>
+            <td>{{ $task->author->name }} {{ $task->author->surname }} {{ $task->author->patronymic }}</td>
+            <td>{{ $task->executor->name }} {{ $task->executor->surname }} {{ $task->executor->patronymic }}</td>
+            <td>{{ $task['project_id'] }}</td>
             <td>
                 <form method="POST" action="{{ route('tasks_destroy', $task->id) }}" style="display:inline;">
                     @csrf

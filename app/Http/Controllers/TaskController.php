@@ -19,7 +19,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::with('project', 'author', 'executor')->get();
         return view('/tasks/tasks', ['tasks' => $tasks]);
     }
 
@@ -42,7 +42,6 @@ class TaskController extends Controller
             'author_id' => $request->input('author_id'),
             'executor_id' => $request->input('executor_id'),
             'project_id' => $request->input('project_id'),
-
         ]);
         return redirect('tasks');
     }
