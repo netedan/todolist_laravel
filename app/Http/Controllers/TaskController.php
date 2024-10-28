@@ -50,6 +50,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $task->load('project');
         return view('/tasks/task', ['task' => $task]);
     }
 

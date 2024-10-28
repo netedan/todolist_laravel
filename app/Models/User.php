@@ -23,4 +23,9 @@ class User extends Model
     {
         return $this->hasMany(Task::class, 'executor_id');
     }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'author_id');
+    }
 }

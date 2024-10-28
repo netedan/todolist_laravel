@@ -17,6 +17,10 @@
             <input type="text" name="user_patronymic" value="{{$user['patronymic']}}">
         </div>
         <div>
+            <label> Project ID </label>
+            <input type="text" name="project_id" value="{{ $user->project_id }}">
+        </div>
+        <div>
             <input type="submit" name="Edit user">
         </div>
     </form>

@@ -26,8 +26,14 @@ class Task extends Model
     {
         return $this->belongsTo(User::class, 'author_id');
     }
+
     public function executor()
     {
         return $this->belongsTo(User::class, 'executor_id');
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'tags_tasks');
     }
 }

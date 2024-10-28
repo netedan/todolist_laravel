@@ -1,3 +1,6 @@
+@extends('layout')
+
+@section('content')
 <form method="POST" action="{{ route('tasks_store') }}">
     @csrf
     <div class="add_page">
@@ -27,3 +30,4 @@
         </div>
     </div>
 </form>
+@endsection

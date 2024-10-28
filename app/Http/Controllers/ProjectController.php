@@ -13,7 +13,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::with('author')->withCount('tasks')->get();
         return view('/projects/projects', ['projects' => $projects]);
     }
 
@@ -30,7 +30,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        $project = Project::create([
+        Project::create([
             'name' => $request->input('project_name'),
             'author_id' => $request->input('author_id'),
         ]);
@@ -42,6 +42,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load('author', 'tasks');
         return view('/projects/project', ['project' => $project]);
     }
 
