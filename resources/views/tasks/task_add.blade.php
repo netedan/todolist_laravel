@@ -24,6 +24,9 @@
             <label> Task project ID </label>
             <input type="number" name="project_id">
         </div>
+
+        @include('forms.errors')
+
         <div id="add">
             <label> Add task </label>
             <input type="submit" name="Add task">

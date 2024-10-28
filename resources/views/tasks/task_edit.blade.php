@@ -21,6 +21,9 @@
         <label> Project ID</label>
         <input type="number" name="project_id" value="{{$task->project_id}}">
     </div>
+
+    @include('forms.errors')
+
     <div>
         <input type="submit" name="Edit task">
     </div>

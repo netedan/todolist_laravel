@@ -16,6 +16,9 @@
                 <label> Add project </label>
                 <input type="submit" name="Add project">
             </div>
+
+            @include('forms.errors')
+
         </div>
     </form>
 @endsection

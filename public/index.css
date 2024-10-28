@@ -74,3 +74,11 @@ body {
     display: block;
     margin: 10px;
 }
+
+.alert {
+    padding-top: 6px;
+}
+
+.alert-danger {
+    color: red;
+}

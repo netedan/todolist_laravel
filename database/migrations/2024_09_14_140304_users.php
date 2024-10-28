@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('patronymic');
-            $table->foreignId('project_id')->nullable()->constrained('projects')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -62,7 +62,6 @@ class UserController extends Controller
         $user->name = $request['user_name'];
         $user->surname = $request['user_surname'];
         $user->patronymic = $request['user_patronymic'];
-        $user->project_id = $request['project_id'];
         $user->save();
         return redirect('/users');
     }
