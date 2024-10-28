@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('content')
-    <form method="POST" action="{{ route('users_store') }}">
+    <form method="POST" action="{{ route('user_store') }}">
     @csrf
         <div class="add_page">
             <div>
@@ -17,8 +17,8 @@
                 <input type="text" name="user_patronymic">
             </div>
             <div id="add">
-                <label> Add project </label>
-                <input type="submit" name="Add project">
+                <label> Add user </label>
+                <input type="submit" name="Add user">
             </div>
         </div>
     </form>
