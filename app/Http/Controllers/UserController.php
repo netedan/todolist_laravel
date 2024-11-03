@@ -13,7 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::withCount('projects')->get();
         return view('/users/users', ['users' => $users]);
     }
 
@@ -36,7 +36,6 @@ class UserController extends Controller
             'patronymic' => $request['user_patronymic'],
         ]);
         return redirect('/users');
-
     }
 
     /**
