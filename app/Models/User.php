@@ -14,4 +14,18 @@ class User extends Model
         'surname',
         'patronymic'
     ];
+
+    public function authoredTask()
+    {
+        return $this->hasMany(Task::class, 'author_id');
+    }
+    public function assignedTask()
+    {
+        return $this->hasMany(Task::class, 'executor_id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'author_id');
+    }
 }

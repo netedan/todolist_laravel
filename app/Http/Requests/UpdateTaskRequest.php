@@ -23,9 +23,11 @@ class UpdateTaskRequest extends FormRequest
     {
         return [
             'task_name' => 'required|string|max:255',
-            'task_status' => 'nullable|string|max:255',
-            'author_id' => 'nullable|integer',
-            'executor_id' => 'nullable|integer',
+            'task_status' => 'required|string|max:255',
+            'author_id' => 'required|integer',
+            'executor_id' => 'required|integer',
+            'project_id' => 'required|integer|exists:projects,id',
+            'tag_id' => 'nullable|integer',
             'due_date' => 'nullable|date',
         ];
     }
