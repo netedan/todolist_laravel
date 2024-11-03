@@ -10,7 +10,12 @@
         </div>
         <div>
             <label> Task status </label>
-            <input type="text" name="task_status">
+            <select name="task_status" required>
+                <option value="Backlog">Backlog</option>
+                <option value="In process">In process</option>
+                <option value="Done">Done</option>
+                <option value="Archive">Archive</option>
+            </select>
         </div>
         <div>
             <label> Task author ID </label>
@@ -32,6 +37,10 @@
         <div>
             <label> Task project ID </label>
             <input type="number" name="project_id">
+        </div>
+        <div>
+            <label>Due date</label>
+            <input type="datetime-local" name="due_date" required>
         </div>
 
         @include('forms.errors')

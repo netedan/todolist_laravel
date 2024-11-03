@@ -12,6 +12,7 @@ use http\Env\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -44,11 +45,21 @@ class TaskController extends Controller
             'author_id' => $request->input('author_id'),
             'executor_id' => $request->input('executor_id'),
             'project_id' => $request->input('project_id'),
+            'due_date' => Carbon::createFromFormat('Y-m-d\TH:i', $request->input('due_date')),
         ]);
 
         $task->tags()->attach($request->input('tag_id', []));
         return redirect('tasks');
     }
+
+    public function checkDeadlines()
+    {
+        $tasks = Task::all();
+        foreach ($tasks as $task) {
+            $task->archiveIfOverdue();
+        }
+    }
+
     /**
      * Display the specified resource.
      */
@@ -73,9 +84,10 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->name = $request->input('task_name');
-        $task->status = $request->input('task_status');
+        $task->status = $request->input('status');
         $task->author_id = $request->input('author_id');
         $task->executor_id = $request->input('executor_id');
+        $task->due_date = $request->input('due_date');
         $task->project_id = $request->input('project_id');
         $task->tags()->sync($request->input('tag_id', []));
         $task->save();

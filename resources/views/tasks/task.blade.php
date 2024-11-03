@@ -11,6 +11,7 @@
             <th>Project ID</th>
             <th>Project name</th>
             <th>Task tag</th>
+            <th>Due Date</th>
         </tr>
         <tr>
             <td>{{ $task['id'] }}</td>
@@ -25,6 +26,7 @@
                     <a href="{{ route('tag_show', $tag->id) }}">{{ $tag->name }}</a>
                 @endforeach
             </td>
+            <td>{{ $task['due_date'] ? \Carbon\Carbon::parse($task['due_date'])->format('Y-m-d H:i') : 'Not set' }}</td>
         </tr>
     </table>
 @endsection

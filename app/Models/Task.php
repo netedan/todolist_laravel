@@ -11,10 +11,11 @@ class Task extends Model
 
     protected $fillable = [
         'name',
-        'status',
         'author_id',
         'executor_id',
-        'project_id'
+        'project_id',
+        'due_date',
+        'status'
     ];
     public function tags()
     {
@@ -39,5 +40,12 @@ class Task extends Model
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'tags_tasks');
+    }
+    public function archiveIfOverdue()
+    {
+        if ($this->status !== 'Archive' && now()->greaterThan($this->due_date)) {
+            $this->status = 'Archive';
+            $this->save();
+        }
     }
 }
