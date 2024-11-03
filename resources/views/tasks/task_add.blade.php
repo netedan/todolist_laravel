@@ -21,6 +21,15 @@
             <input type="number" name="executor_id">
         </div>
         <div>
+            <label>Select Tag</label>
+            <select name="tag_id">
+                <option value="">Select a tag</option>
+                @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div>
             <label> Task project ID </label>
             <input type="number" name="project_id">
         </div>

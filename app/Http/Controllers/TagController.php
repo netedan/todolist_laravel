@@ -15,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::withCount('projects', 'tasks')->get();
         return view('/tags/tags', ['tags' => $tags]);
     }
 
@@ -24,7 +24,9 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('/tags/tag_add');
+        $tasks = Task::all();
+        $projects = Project::all();
+        return view('/tags/tag_add', compact('projects', 'tasks'));
     }
 
     /**
@@ -32,9 +34,11 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        Tag::create([
+        $tag = Tag::create([
             'name' => $request->input('name'),
         ]);
+        $tag->projects()->attach($request->input('project_id'));
+        $tag->tasks()->attach($request->input('task_id'));
 
         return redirect('/tags');
     }
@@ -44,6 +48,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
+        $tag->load('projects', 'tasks');
         return view('/tags/tag', ['tag' => $tag]);
     }
 
@@ -52,7 +57,9 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('/tags/tag_edit', ['tag' => $tag]);
+        $projects = Project::all();
+        $tasks = Task::all();
+        return view('/tags/tag_edit', compact( 'tag','projects', 'tasks'));
     }
 
     /**
@@ -61,7 +68,10 @@ class TagController extends Controller
     public function update(UpdateTagRequest $request, Tag $tag)
     {
         $tag->name = $request->input('tag_name');
+        $tag->projects()->sync($request->input('project_id', []));
+        $tag->tasks()->sync($request->input('task_id', []));
         $tag->save();
+
         return redirect('/tags');
     }
 
