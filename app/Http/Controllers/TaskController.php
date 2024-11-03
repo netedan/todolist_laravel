@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
+use App\Models\Tag;
 use App\Models\Task;
 use App\Repositories\TaskRepository;
 use DB;
@@ -11,6 +12,7 @@ use http\Env\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -19,7 +21,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = Task::all();
+        $tasks = Task::withCount('tags')->with('project', 'author', 'executor')->get();
         return view('/tasks/tasks', ['tasks' => $tasks]);
     }
 
@@ -28,7 +30,8 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('/tasks/task_add');
+        $tags = Tag::all();
+        return view('/tasks/task_add', compact('tags'));
     }
 
     /**
@@ -40,15 +43,29 @@ class TaskController extends Controller
             'name' => $request->input('task_name'),
             'status' => $request->input('task_status'),
             'author_id' => $request->input('author_id'),
-            'executor_id' => $request->input('executor_id')
+            'executor_id' => $request->input('executor_id'),
+            'project_id' => $request->input('project_id'),
+            'due_date' => Carbon::createFromFormat('Y-m-d\TH:i', $request->input('due_date')),
         ]);
+
+        $task->tags()->attach($request->input('tag_id', []));
         return redirect('tasks');
     }
+
+    public function checkDeadlines()
+    {
+        $tasks = Task::all();
+        foreach ($tasks as $task) {
+            $task->archiveIfOverdue();
+        }
+    }
+
     /**
      * Display the specified resource.
      */
     public function show(Task $task)
     {
+        $task->load('project', 'tags');
         return view('/tasks/task', ['task' => $task]);
     }
 
@@ -57,7 +74,8 @@ class TaskController extends Controller
      */
     public function edit(Task $task)
     {
-        return view('/tasks/task_edit', ['task' => $task]);
+        $tags = Tag::all();
+        return view('/tasks/task_edit', compact('task', 'tags'));
     }
 
     /**
@@ -66,9 +84,12 @@ class TaskController extends Controller
     public function update(UpdateTaskRequest $request, Task $task)
     {
         $task->name = $request->input('task_name');
-        $task->status = $request->input('task_status');
+        $task->status = $request->input('status');
         $task->author_id = $request->input('author_id');
         $task->executor_id = $request->input('executor_id');
+        $task->due_date = $request->input('due_date');
+        $task->project_id = $request->input('project_id');
+        $task->tags()->sync($request->input('tag_id', []));
         $task->save();
         return redirect('tasks');
     }
