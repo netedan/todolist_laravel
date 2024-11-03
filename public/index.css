@@ -105,3 +105,11 @@ tr:nth-child(even) {
     display: block;
     margin: 10px 0;
 }
+
+.alert {
+    padding-top: 6px;
+}
+
+.alert-danger {
+    color: red;
+}

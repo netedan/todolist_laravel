@@ -1,11 +1,21 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+use App\Http\Controllers\Auth\RegisterController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +29,7 @@ Route::controller(TaskController::class)->prefix('tasks')->group(function () {
     Route::get('/{task}/edit', 'edit')->name('task_edit');
     Route::put('/{task}', 'update')->name('task_update');
     Route::delete('/{task}', 'destroy')->name('tasks_destroy');
+    Route::post('tasks/check-deadlines', 'checkDeadlines')->name('tasks_check_deadlines');
 });
 
 Route::controller(ProjectController::class)->prefix('projects')->group(function () {
@@ -54,4 +65,24 @@ Route::controller(TagController::class)->prefix('tags')->group(function () {
 Route::controller(SearchController::class)->prefix('search')->group(function () {
     Route::get('/', 'index')->name('search');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__ . '/auth.php';
+Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('/register', [RegisteredUserController::class, 'store']);
+
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 

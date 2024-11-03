@@ -1,30 +1,39 @@
 @extends('layout')
 
 @section('content')
-<div class="add_button">
-    <ul>
-        <li>
-            <a href="{{ route('task_add') }}" class="btn btn-primary">Добавить задачу</a>
-        </li>
-    </ul>
-</div>
+    <div class="add_button">
+        <ul>
+            <li>
+                <a href="{{ route('task_add') }}" class="btn btn-primary">Add task</a>
+            </li>
+        </ul>
+    </div>
 
 <table>
+    <thead>
     <tr>
-        <th>Task ID</th>
-        <th>Task name</th>
-        <th>Task status</th>
-        <th>Task author ID</th>
-        <th>Task executor ID</th>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Author ID</th>
+        <th>Executor ID</th>
+        <th>Project ID</th>
+        <th>Due Date</th>
+        <th>Tags</th>
         <th>Manage</th>
     </tr>
+    </thead>
+    <tbody>
     @foreach($tasks as $task)
         <tr>
             <td><a href="{{ route('task_show', $task->id) }}">{{ $task->id }}</a></td>
-            <td>{{ $task['name'] }}</td>
-            <td>{{ $task['status'] }}</td>
-            <td>{{ $task['author_id'] }}</td>
-            <td>{{ $task['executor_id'] }}</td>
+            <td>{{ $task->name }}</td>
+            <td>{{ $task->status }}</td>
+            <td>{{ $task->author->name }} {{ $task->author->surname }} {{ $task->author->patronymic }}</td>
+            <td>{{ $task->executor->name }} {{ $task->executor->surname }} {{ $task->executor->patronymic }}</td>
+            <td>{{ $task->project_id }}</td>
+            <td>{{ $task->due_date ? \Carbon\Carbon::parse($task->due_date)->format('Y-m-d H:i') : 'Not set' }}</td>
+            <td>{{ $task->tags_count }}</td>
             <td>
                 <form method="POST" action="{{ route('tasks_destroy', $task->id) }}" style="display:inline;">
                     @csrf
@@ -37,5 +46,6 @@
             </td>
         </tr>
     @endforeach
+    </tbody>
 </table>
 @endsection
