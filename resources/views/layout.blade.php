@@ -20,6 +20,26 @@
             <a href="/tags">Tags</a>
         </li>
     </ul>
+    <form action="{{ route('search') }}" method="GET">
+        <input type="text" name="q" placeholder="Введите запрос..." required>
+        <button type="submit">Найти</button>
+    </form>
+
+    <div>
+        <label>
+            <input type="radio" name="search_type" value="users" checked> Пользователи
+        </label>
+        <label>
+            <input type="radio" name="search_type" value="projects"> Проекты
+        </label>
+        <label>
+            <input type="radio" name="search_type" value="tags"> Теги
+        </label>
+        <label>
+            <input type="radio" name="search_type" value="tasks"> Tasks
+        </label>
+    </div>
+
     <form method="POST" action="{{ route('logout') }}">
         @csrf
         <button type="submit">Logout</button>
