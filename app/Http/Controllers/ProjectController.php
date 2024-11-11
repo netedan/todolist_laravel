@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
@@ -30,7 +31,14 @@ class ProjectController extends Controller
             $query->where('id', $request->input('project_id'));
         }
 
-        $projects = $query->get();
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['asc', 'desc'])) {
+            $order = 'asc';
+        }
+
+        $projects = $query->orderBy($sort, $order)->get();
 
         return view('projects.projects', compact('projects'));
     }

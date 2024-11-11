@@ -32,7 +32,14 @@ class UserController extends Controller
             $query->where('id', $request->get('user_id'));
         }
 
-        $users = $query->get();
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['id', 'name'])) {
+            $sort = 'id';
+        }
+
+        $users = $query->orderBy($sort, $order)->get();
 
         return view('users.users', compact('users'));
     }

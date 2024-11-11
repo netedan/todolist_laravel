@@ -25,7 +25,15 @@ class TagController extends Controller
         if ($request->filled('tag_id')) {
             $query->where('id', $request->get('tag_id'));
         }
-        $tags = $query->get();
+
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($sort, ['id', 'name'])) {
+            $sort = 'id';
+        }
+
+        $tags = $query->orderBy($sort, $order)->get();
 
         return view('tags.tags', compact('tags'));
     }

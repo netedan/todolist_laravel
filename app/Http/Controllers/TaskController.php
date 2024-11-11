@@ -43,7 +43,14 @@ class TaskController extends Controller
             $query->where('id', $request->get('task_id'));
         }
 
-        $tasks = $query->get();
+        $sort = $request->get('sort', 'id');
+        $order = $request->get('order', 'asc');
+
+        if (!in_array($order, ['asc', 'desc'])) {
+            $sort = 'id';
+        }
+
+        $tasks = $query->orderBy($sort, $order)->get();
 
         return view('tasks.tasks', compact('tasks'));
     }

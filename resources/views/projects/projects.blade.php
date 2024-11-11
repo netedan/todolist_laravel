@@ -22,9 +22,9 @@
 
     <table>
         <tr>
-            <th>Project ID</th>
-            <th>Author name</th>
-            <th>Project name</th>
+            <th><a href="{{ route('projects', ['sort' => 'id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Project ID</a></th>
+            <th><a href="{{ route('projects', ['sort' => 'author_id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Author ID</a></th>
+            <th><a href="{{ route('projects', ['sort' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Project name</a></th>
             <th>Tasks</th>
             <th>Tags</th>
             <th>Manage</th>

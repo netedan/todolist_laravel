@@ -23,11 +23,11 @@
     <table>
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Author ID</th>
-            <th>Executor ID</th>
+            <th><a href="{{ route('tasks', ['sort' => 'id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Task ID</a></th>
+            <th><a href="{{ route('tasks', ['sort' => 'name', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Task name</a></th>
+            <th><a href="{{ route('tasks', ['sort' => 'status', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Task status</a></th>
+            <th><a href="{{ route('tasks', ['sort' => 'author_id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Task author ID</a></th>
+            <th><a href="{{ route('tasks', ['sort' => 'executor_id', 'order' => request('order') === 'asc' ? 'desc' : 'asc']) }}">Task executor ID</a></th>
             <th>Project ID</th>
             <th>Due Date</th>
             <th>Tags</th>
