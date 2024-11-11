@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -15,6 +16,20 @@ class ProjectController extends Controller
      */
     public function index(Request $request)
     {
+        $query = Project::with('author')
+            ->withCount(['tasks', 'tags']);
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('author_id')) {
+            $query->where('author_id', $request->input('author_id'));
+        }
+
+        if ($request->filled('project_id')) {
+            $query->where('id', $request->input('project_id'));
+        }
 
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'asc');
@@ -23,9 +38,9 @@ class ProjectController extends Controller
             $order = 'asc';
         }
 
-        $projects = Project::orderBy($sort, $order)->get();
+        $projects = $query->orderBy($sort, $order)->get();
 
-        return view('/projects/projects', compact('projects'));
+        return view('projects.projects', compact('projects'));
     }
 
     /**
@@ -33,7 +48,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('/projects/project_add');
+        $tags = Tag::all();
+        return view('/projects/project_add', compact('tags'));
     }
 
     /**
@@ -45,6 +61,9 @@ class ProjectController extends Controller
             'name' => $request->input('project_name'),
             'author_id' => $request->input('author_id'),
         ]);
+//        $tag = Tag::find($request->input('tag_id'));
+        $project->tags()->attach($request->input('tag_id', []));
+
         return redirect('/projects');
     }
 
@@ -53,6 +72,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+        $project->load('author', 'tasks', 'tags');
         return view('/projects/project', ['project' => $project]);
     }
 
@@ -61,7 +81,8 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('/projects/project_edit', ['project' => $project]);
+        $tags = Tag::all();
+        return view('/projects/project_edit', compact('project', 'tags'));
     }
 
     /**
@@ -71,6 +92,7 @@ class ProjectController extends Controller
     {
         $project->name = $request->input('project_name');
         $project->author_id = $request->input('author_id');
+        $project->tags()->sync($request->input('tag_id', []));
         $project->save();
         return redirect('/projects');
     }

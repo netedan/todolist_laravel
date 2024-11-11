@@ -22,7 +22,9 @@ services:
         networks:
             - sail
         depends_on:
+            - mysql
             - pgsql
+
     pgsql:
         image: 'postgres:15'
         ports:
@@ -48,9 +50,32 @@ services:
                 - '${DB_USERNAME}'
             retries: 3
             timeout: 5s
+
+    mysql:  # Перенесено на уровень выше
+        image: 'mysql:8.0.32'  # Или другая версия
+        ports:
+            - '${FORWARD_DB_PORT_MYSQL:-3306}:3306'  # Можно указать свой порт
+        environment:
+            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD:-secret}'
+            MYSQL_DATABASE: '${DB_DATABASE}'
+            MYSQL_USER: '${DB_USERNAME}'
+            MYSQL_PASSWORD: '${DB_PASSWORD:-secret}'
+        volumes:
+            - 'sail-mysql:/var/lib/mysql'  # Объем для хранения данных
+        networks:
+            - sail
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            interval: 30s
+            retries: 5
+            timeout: 10s
+
 networks:
     sail:
         driver: bridge
+
 volumes:
     sail-pgsql:
+        driver: local
+    sail-mysql:
         driver: local

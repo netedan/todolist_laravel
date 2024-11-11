@@ -14,6 +14,24 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $query = User::withCount('projects');
+
+        if ($request->filled('name')){
+            $query->where('name', 'like', '%'.$request->get('name').'%');
+        }
+
+        if ($request->filled('surname')){
+            $query->where('surname', 'like', '%'.$request->get('surname').'%');
+        }
+
+        if ($request->filled('patronymic')){
+            $query->where('patronymic', 'like', '%'.$request->get('patronymic').'%');
+        }
+
+        if ($request->filled('user_id')){
+            $query->where('id', $request->get('user_id'));
+        }
+
         $sort = $request->get('sort', 'id');
         $order = $request->get('order', 'asc');
 
@@ -21,8 +39,9 @@ class UserController extends Controller
             $sort = 'id';
         }
 
-        $users = User::orderBy($sort, $order)->get();
-        return view('/users/users', compact('users'));
+        $users = $query->orderBy($sort, $order)->get();
+
+        return view('users.users', compact('users'));
     }
 
     /**
@@ -44,7 +63,6 @@ class UserController extends Controller
             'patronymic' => $request['user_patronymic'],
         ]);
         return redirect('/users');
-
     }
 
     /**

@@ -16,6 +16,9 @@
             <label> User patronymic </label>
             <input type="text" name="user_patronymic" value="{{$user['patronymic']}}">
         </div>
+
+        @include('forms.errors')
+
         <div>
             <input type="submit" name="Edit user">
         </div>

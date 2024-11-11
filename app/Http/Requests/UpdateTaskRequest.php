@@ -26,6 +26,9 @@ class UpdateTaskRequest extends FormRequest
             'task_status' => 'required|string|max:255',
             'author_id' => 'required|integer',
             'executor_id' => 'required|integer',
+            'project_id' => 'required|integer|exists:projects,id',
+            'tag_id' => 'nullable|integer',
+            'due_date' => 'nullable|date',
         ];
     }
 }
