@@ -6,18 +6,33 @@ use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $projects = Project::with('author')
-            ->withCount(['tasks', 'tags'])
-            ->get();
-        return view('/projects/projects', ['projects' => $projects]);
+        $query = Project::with('author')
+            ->withCount(['tasks', 'tags']);
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', '%' . $request->input('name') . '%');
+        }
+
+        if ($request->filled('author_id')) {
+            $query->where('author_id', $request->input('author_id'));
+        }
+
+        if ($request->filled('project_id')) {
+            $query->where('id', $request->input('project_id'));
+        }
+
+        $projects = $query->get();
+
+        return view('projects.projects', compact('projects'));
     }
 
     /**

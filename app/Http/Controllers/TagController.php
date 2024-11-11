@@ -7,16 +7,27 @@ use App\Http\Requests\UpdateTagRequest;
 use App\Models\Project;
 use App\Models\Tag;
 use App\Models\Task;
+use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tags = Tag::withCount('projects', 'tasks')->get();
-        return view('/tags/tags', ['tags' => $tags]);
+        $query = Tag::withCount('projects', 'tasks');
+
+        if ($request->filled('name')) {
+            $query->where('name', 'like', "%{$request->get('name')}%");
+        }
+
+        if ($request->filled('tag_id')) {
+            $query->where('id', $request->get('tag_id'));
+        }
+        $tags = $query->get();
+
+        return view('tags.tags', compact('tags'));
     }
 
     /**
