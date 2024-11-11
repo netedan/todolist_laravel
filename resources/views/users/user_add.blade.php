@@ -16,9 +16,12 @@
                 <label> User patronymic </label>
                 <input type="text" name="user_patronymic">
             </div>
+
+            @include('forms.errors')
+
             <div id="add">
-                <label> Add project </label>
-                <input type="submit" name="Add project">
+                <label> Add user </label>
+                <input type="submit" name="Add user">
             </div>
         </div>
     </form>

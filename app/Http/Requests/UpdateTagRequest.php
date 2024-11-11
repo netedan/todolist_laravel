@@ -23,6 +23,8 @@ class UpdateTagRequest extends FormRequest
     {
         return [
             'tag_name' => 'required|string|max:255',
+            'project_id' => 'nullable|integer|exists:projects,id',
+            'task_id' => 'nullable|integer|exists:tasks,id',
         ];
     }
 }

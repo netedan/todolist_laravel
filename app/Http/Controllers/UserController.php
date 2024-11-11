@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::query();
+        $query = User::withCount('projects');
 
         if ($request->filled('name')){
             $query->where('name', 'like', '%'.$request->get('name').'%');
@@ -35,7 +35,6 @@ class UserController extends Controller
         $users = $query->get();
 
         return view('users.users', compact('users'));
-
     }
 
     /**
@@ -57,7 +56,6 @@ class UserController extends Controller
             'patronymic' => $request['user_patronymic'],
         ]);
         return redirect('/users');
-
     }
 
     /**
