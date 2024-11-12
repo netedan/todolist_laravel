@@ -5,23 +5,34 @@
     @csrf
         <div class="add_page">
             <div>
-                <label> User name </label>
-                <input type="text" name="user_name">
+                <label for="name"> User name </label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}">
             </div>
             <div>
-                <label> User surname </label>
-                <input type="text" name="user_surname">
+                <label for="surname"> User surname </label>
+                <input type="text" id="surname" name="surname" value="{{ old('surname') }}">
             </div>
             <div>
-                <label> User patronymic </label>
-                <input type="text" name="user_patronymic">
+                <label for="patronymic"> User patronymic </label>
+                <input type="text" id="patronymic" name="patronymic" value="{{ old('patronymic') }}">
+            </div>
+            <div>
+                <label for="email"> User email </label>
+                <input type="email" id="email" name="email" value="{{ old('email') }}">
+            </div>
+            <div>
+                <label for="password"> User password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <label for="password_confirmation"> Confirm password</label>
+                <input type="password" id="password_confirmation" name="password_confirmation">
             </div>
 
             @include('forms.errors')
 
             <div id="add">
-                <label> Add user </label>
-                <input type="submit" name="Add user">
+                <input type="submit" value="Add user">
             </div>
         </div>
     </form>

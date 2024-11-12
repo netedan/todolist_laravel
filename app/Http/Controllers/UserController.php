@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\Users\StoreUserRequest;
+use App\Http\Requests\Users\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -57,10 +58,12 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $user = User::create([
-            'name' => $request['user_name'],
-            'surname' => $request['user_surname'],
-            'patronymic' => $request['user_patronymic'],
+        User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'patronymic' => $request->patronymic,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
         ]);
         return redirect('/users');
     }
@@ -86,10 +89,14 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        $user->name = $request['user_name'];
-        $user->surname = $request['user_surname'];
-        $user->patronymic = $request['user_patronymic'];
-        $user->save();
+        $user->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'patronymic' => $request->patronymic,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
         return redirect('/users');
     }
 
